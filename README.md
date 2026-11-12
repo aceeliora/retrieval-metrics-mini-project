@@ -80,3 +80,8 @@ SELECT post_id FROM posts ORDER BY embedding <=> $1 LIMIT 10;
 ```
 
 Wire each into `async keywordSearch(query)` and `async semanticSearch(query)` returning ranked `post_id` lists, then run your exact same metric code. The metrics do not change, only where the ranked lists come from.
+
+
+## Interpretation
+
+Semantic search is better overall on both metrics: it scores MRR 0.67 and Recall@10 1.00, compared with keyword search at 0.30 and 0.60. Keyword search wins on “redis or memcached for caching” and “sql or nosql for a new product,” which use specific terms and explicit technology comparisons that closely match the indexed wording. Semantic search wins on the other eight queries, especially paraphrases and symptom-based questions where the user’s wording differs from the post’s wording. Its results show that matching the meaning and intent of a question can surface relevant posts even when the exact words do not overlap. A team might still keep keyword search because it can rank exact technical terms and named alternatives exceptionally well, complementing semantic search on the queries where lexical matches matter most.
